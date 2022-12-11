@@ -52,27 +52,27 @@
             position: absolute;
             top: 120%;
             left: 50%;
-            background: #fff;
+            background: white;
             width: 50rem;
             height: 50rem;
             margin-left: -25rem;
-            margin-top: -25rem;
+            margin-top: -20rem;
             transform-origin: 50% 48%;
             border-radius: 43%;
-            animation: drift 3s infinte linear;
-            z-index: -1;
+            animation: drift 3000ms infinite linear;
+            z-index: 1;
         }
 
         .three{
-            animation: drift 5s infinte linear;
+            animation: drift 5000ms infinite linear;
             opacity: 0.1;
-            z-index: 2;
+            z-index: 2 !important;
         }
 
         .two{
-            animation: drift 7s infinte linear;
-            opacity: 0.1;
-            z-index: 3;
+            animation: drift 7000ms infinite linear;
+            opacity: 0.4;
+            z-index: 3 !important;
         }
 
         .box::after{
@@ -224,20 +224,32 @@
         const tempStatus = "Clouds";
 
         const getCurrDay = () =>{
+            let currTime = "";
             let d = new Date();
 
-            let weekDays = new Array(7);
-            weekDays[0] = "Sunday";
-            weekDays[1] = "Monday";
-            weekDays[2] = "Tuesday";
-            weekDays[3] = "Wednesday";
-            weekDays[4] = "Thursday";
-            weekDays[5] = "Friday";
-            weekDays[6] = "Saturday";
+            let w = [ "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+            let mon = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
 
-            console.log(weekDays[d.getDay()]);
-            console.log(d.getDate());
-            console.log(d.getMonth()+1);
+            let day = w[d.getDay()];
+            currTime = `${day.substring(0,3).toUpperCase()} | ${d.getDate()} ${mon[d.getMonth()]}`;
+            
+            let periods = "AM";
+            let hrs = d.getHours();
+            let min = d.getMinutes();
+            if(hrs > 11){
+                periods = "PM";
+                if(hrs > 12)
+                    hrs -= 12;
+            }
+
+            if(min < 10)
+                min = "0" + min;
+
+            currTime += ` | ${hrs}:${min} ${periods}`;
+
+            let elemDate = document.getElementById("datetime");
+            elemDate.innerHTML = currTime;
+            
         }
 
         getCurrDay();
