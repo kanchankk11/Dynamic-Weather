@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 
 app.get("/home", (req, res) => {
   requests(
-    "https://api.openweathermap.org/data/2.5/weather?q=Switzerland&appid=728bb9c50b7057f41dd2db7e6084b4f5"
+    "https://api.openweathermap.org/data/2.5/weather?q=Switzerland&appid=API_KEY"
   )
     .on("data", (chunk) => {
       let chunkObj = JSON.parse(chunk);
